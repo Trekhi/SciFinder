@@ -1,0 +1,15 @@
+# Evitar node_modules y archivos de dependencias
+node_modules/
+package-lock.json
+
+# Evitar archivos de configuración local
+dist/
+.env
+*.log
+
+# Evitar archivos de compilación de TypeScript
+*.tsbuildinfo
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
