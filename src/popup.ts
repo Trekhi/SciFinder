@@ -16,3 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const navigateBtn = document.getElementById("navigate");
+    if (navigateBtn) {
+        navigateBtn.addEventListener("click", () => {
+            window.location.href = chrome.runtime.getURL("popup/steel.html");
+        });
+    }
+});
