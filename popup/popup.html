@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <title>Mi Extensión</title>
-    <script src="../dist/popup.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SciFinder</title>
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <h1>Hola, prueba!</h1>
+    <div class="popup-container">
+        <header class="popup-header">
+            <img src="../assets/logo.png" alt="SciFinder Logo" class="logo">
+            <button id="closePopup" class="close-btn">✖</button>
+        </header>
+
+        <div class="popup-content">
+            <img src="../assets/icon.png" alt="SciFinder Icon" class="main-icon">
+            <h2>SciFinder <br> <span>Information Link</span></h2>
+            <p>Contrary to popular <strong>belief</strong>, Lorem Ipsum is not simply random text. It has roots in a <strong>piece of class</strong>.</p>
+
+            <button id="loginBtn" class="login-btn">Login</button>
+            <a href="#" class="forgot-password">problems logging in?</a>
+
+            <div class="icons-section">
+                <img src="../assets/icon1.png" alt="icon1">
+                <img src="../assets/icon2.png" alt="icon2">
+                <img src="../assets/icon3.png" alt="icon3">
+            </div>
+
+            <div class="info-box">
+                <p>There are many variations of passages of Lorem Ipsum available, but the majority</p>
+            </div>
+
+            <p class="signup-text">You don’t have an account? <a href="#">Create account</a></p>
+        </div>
+    </div>
+
+    <script src="../dist/popup.js"></script>
 </body>
 </html>
