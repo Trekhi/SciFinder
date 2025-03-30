@@ -6,6 +6,7 @@ package-lock.json
 dist/
 .env
 *.log
+src/config.ts
 
 # Evitar archivos de compilación de TypeScript
 *.tsbuildinfo

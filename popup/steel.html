@@ -9,32 +9,26 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">SciFinder</div>
+            <div class="logo">
+                <img src="../assets/icon.png" alt="SciFinder Logo">
+                <p>SciFinder</p>
+            </div>
             <button id="closePopup" class="close-btn">✖</button>
         </div>
         <h2>Introduce topic</h2>
         <p>Converts <strong>natural language</strong> queries into optimized logical expressions for efficient <strong>filtering</strong>.</p>
         <div class="search-bar">
             <span class="search-icon">&#128269;</span>
-            <input type="text" placeholder="Urban agriculture">
+            <input type="text" id="searchInput" placeholder="Search for...">
         </div>
         <h3>Suggestions generated</h3>
 
         <div class="content">
             
         </div>
-        <!--APARTADO DONDE SALDRAN LAS CONSULTAS CON LA API.
-        <ul class="suggestions">
-            <li><input type="checkbox"> "Climate change effects" AND "agricultural crops"</li>
-            <li><input type="checkbox"> "photoperiod" AND ("plant physiology" OR "photosynthetic efficiency")</li>
-            <li><input type="checkbox"> ("plant monitoring" OR "plant status") AND (ai OR "deep learning")</li>
-            <li><input type="checkbox"> "Difficulties in plant maintenance" AND "diseases"</li>
-            <li><input type="checkbox"> "Fertilization" AND ("Essential nutrients" OR "Water use efficiency")</li>
-        </ul>
-        -->
 
         <div class="footer">
-            <button id="goBack">Go Back</button>
+            <button id="goBack">🔙</button>
             <!--
             <span class="user-name">Daniel</span>
             <span class="email">danieltamriv@gmail.com</span>
@@ -42,6 +36,6 @@
             -->
         </div>
     </div>
-    <script src="../dist/steel.js"></script>
+    <script type="module" src="../dist/steel.js"></script>
 </body>
 </html>

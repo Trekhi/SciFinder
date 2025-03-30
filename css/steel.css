@@ -18,8 +18,16 @@ body {
     align-items: center;
 }
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo p{
     font-weight: bold;
     font-size: 18px;
+}
+.logo img {
+    height: 30px;
 }
 .close-btn {
     background: none;
@@ -83,4 +91,52 @@ h2 {
 p {
     font-size: 12px;
     color: #555;
+}
+
+.query-card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 500px;
+}
+
+.query-text {
+    flex: 1;
+    text-align: start;
+    font-size: 12px;
+}
+
+.copy-btn {
+    background: #1c4d6e;
+    color: white;
+    border: none;
+    padding: 8px 8px;
+    margin-left: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.copy-btn:hover {
+    background: #134e75;
+}
+
+.copy-btn.copied {
+    background: #27ae60;
+}
+
+.goBack {
+    background: #E0E0E0;
+    border: none;
+    padding: 12px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.3s;
 }

@@ -3,9 +3,19 @@
     "name": "Mi Extensión",
     "version": "1.0",
     "description": "Una extensión de Chrome con TypeScript",
-    "permissions": ["storage", "activeTab"],
+    "permissions": [
+      "storage", 
+      "activeTab", 
+      "tabs", 
+      "scripting",
+      "clipboardWrite",
+      "clipboardRead"
+    ],
+    "host_permissions": ["<all_urls>"],
     "background": {
-      "service_worker": "dist/background.js"
+      "scripts": ["dist/background.js"],
+      "persistent": false,
+      "type": "module"
     },
     "action": {
       "default_popup": "popup/popup.html"
