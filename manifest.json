@@ -13,8 +13,11 @@
     ],
     "host_permissions": ["<all_urls>"],
     "background": {
+      // Linea para ejecutar en Firefox
       "scripts": ["dist/background.js"],
-      "persistent": false,
+      // Linea para ejecutar en Chrome
+      // "service_worker": "dist/background.js",
+      // "persistent": false,
       "type": "module"
     },
     "action": {
