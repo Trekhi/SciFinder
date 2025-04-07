@@ -1,5 +1,4 @@
-import { API_CONFIG } from "./config.js"; 
-
+import { API_CONFIG } from "./config.js";
 
 console.log("Popup Steel loaded");
 
@@ -15,10 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "popup.html";
         });
     }
-    
+
     if (closePopupBtn) {
         closePopupBtn.addEventListener("click", () => {
-            window.close(); 
+            window.close();
         });
     }
 
@@ -42,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("click", (event) => {
         const target = event.target as HTMLElement;
-        
+
         if (target.classList.contains("copy-btn")) {
             const index = Array.from(document.querySelectorAll(".copy-btn")).indexOf(target);
             copyQuery(index);
@@ -86,9 +85,9 @@ async function fetchBooleanQueries(keyword: string, contentDiv: Element, ASSISTA
                 "OpenAI-Beta": "assistants=v2"
             }
         });
-        
+
         const threadData = await threadResponse.json();
-        
+
         if (!threadResponse.ok) {
             throw new Error(`Error al crear el hilo: ${threadData.error?.message || "Desconocido"}`);
         }
@@ -106,7 +105,7 @@ async function fetchBooleanQueries(keyword: string, contentDiv: Element, ASSISTA
             },
             body: JSON.stringify({
                 role: "user",
-                content: `Genera cadenas de consultas booleanas para la palabra clave: ${keyword}`
+                content: `${keyword}`
             })
         });
 
@@ -134,7 +133,7 @@ async function fetchBooleanQueries(keyword: string, contentDiv: Element, ASSISTA
             await new Promise((resolve) => setTimeout(resolve, 2000)); // Esperar 2 segundos antes de revisar el estado
 
             const checkRunResponse = await fetch(`https://api.openai.com/v1/threads/${threadId}/runs/${runId}`, {
-                headers: { 
+                headers: {
                     "Authorization": `Bearer ${OPENAI_API_KEY}`,
                     "OpenAI-Beta": "assistants=v2"
                 }
@@ -148,9 +147,9 @@ async function fetchBooleanQueries(keyword: string, contentDiv: Element, ASSISTA
 
         // Obtiene la respuesta del asistente
         const messagesResponse = await fetch(`https://api.openai.com/v1/threads/${threadId}/messages`, {
-            headers: { 
+            headers: {
                 "Authorization": `Bearer ${OPENAI_API_KEY}`,
-                "OpenAI-Beta": "assistants=v2" 
+                "OpenAI-Beta": "assistants=v2"
             }
         });
 
@@ -158,16 +157,52 @@ async function fetchBooleanQueries(keyword: string, contentDiv: Element, ASSISTA
         const responseMessage = messagesData.data[messagesData.data.length - 2]?.content[0]?.text?.value || "⚠️ No se generaron consultas.";
 
         // Separa las consultas en una lista
-        const queries = responseMessage.split("\n").filter((query: string) => query.trim() !== "");
+        let queries = []
 
-        contentDiv.innerHTML = `
+        queries = responseMessage.split("\n").filter((query: string) => query.trim() !== "");
+
+        /*contentDiv.innerHTML = `
             ${queries.map((query: string, index: number) => `
                 <div id="query-${index}" class="query-card">
                     <span class="query-text">${query}</span>
                     <button class="copy-btn">📋</button>
                 </div>
             `).join('')}
+        `;*/
+
+        contentDiv.innerHTML = `
+            ${queries.map((query: string, index: number) => {
+            const parts = query.split(" - ");
+            const queryText = parts[0].trim();
+            const description = parts.slice(1).join(" - ").trim();
+
+            return `
+                <div id="query-${index}" class="query-card">
+                    <div class="query-header">
+                        <span class="query-text">${queryText}</span>
+                        <button class="copy-btn" data-index="${index}">📋</button>
+                        ${description
+                    ? `<button class="toggle-btn" data-target="desc-${index}">💡</button>`
+                    : ""
+                }
+                    </div>
+                    ${description
+                    ? `<div id="desc-${index}" class="query-description" style="display: none;">${description}</div>`
+                    : ""
+                }
+                </div>
+                `;
+        }).join('')}
         `;
+
+        document.querySelectorAll<HTMLButtonElement>('.toggle-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                if (targetId) {
+                    toggleDescription(targetId);
+                }
+            });
+        });
 
     } catch (error) {
         console.error("Error al conectar con OpenAI:", error);
@@ -206,5 +241,12 @@ async function copyQuery(index: number) {
 
     } catch (error) {
         console.error("Error copying:", error);
+    }
+}
+
+function toggleDescription(id: string): void {
+    const descDiv = document.getElementById(id);
+    if (descDiv) {
+        descDiv.style.display = descDiv.style.display === "none" ? "block" : "none";
     }
 }
